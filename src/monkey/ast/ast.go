@@ -114,3 +114,16 @@ func (es *ExpressionStatement) String() string {
 
 	return ""
 }
+
+type IntegerLiteral struct {
+	Token token.Token
+	// Value here is an int64 because this is the field that's going
+	// to contain the actual value the integer literal represents in the
+	// source code. We will convert the string in
+	// *ast.IntegerLiteral.Token.Literal to an int64. This will happen in the parser
+	Value int64
+}
+
+func (il *IntegerLiteral) expressionNode()      {}
+func (il *IntegerLiteral) TokenLiteral() string { return il.Token.Literal }
+func (il *IntegerLiteral) String() string       { return il.Token.Literal }
